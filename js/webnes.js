@@ -20,13 +20,14 @@ var WebNES = function(nes) {
   var self = this;
   $(document).one('touchend', function() {
     var source = self.audio.createBufferSource();
-    source.buffer = self.audio.createBuffer(2, 1, 22050);
+    source.buffer = self.audio.createBuffer(2, 1, 44100);
     source.connect(self.audio.destination);
     if (source.start) {
         source.start(0);
     } else {
         source.noteOn(0);
     }
+    nes.stop();
   });
 
   var intervalId = 0;
