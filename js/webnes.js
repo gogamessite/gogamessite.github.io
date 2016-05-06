@@ -1,6 +1,8 @@
 var WebNES = function(nes) {
   this.nes = nes;
-  this.audio = new webkitAudioContext();
+  window.AudioContext = window.AudioContext||window.webkitAudioContext;
+  this.audio = new AudioContext();
+  //this.audio = new webkitAudioContext();
 
   // Initialize screen context
   this.screen = document.getElementById('screen');
@@ -16,11 +18,15 @@ var WebNES = function(nes) {
 
   // Unlock audio
   var self = this;
-  $(document).one('touchstart', function() {
+  $(document).one('touchend', function() {
     var source = self.audio.createBufferSource();
-    source.buffer = self.audio.createBuffer(1, 1, 22050);
+    source.buffer = self.audio.createBuffer(2, 1, 22050);
     source.connect(self.audio.destination);
-    source.start(0);
+    if (source.start) {
+        source.start(0);
+    } else {
+        source.noteOn(0);
+    }
   });
 
   var intervalId = 0;
@@ -65,7 +71,11 @@ WebNES.prototype = {
     var source = this.audio.createBufferSource();
     source.buffer = buffer;
     source.connect(this.audio.destination);
-    source.start(0);
+    if (source.start) {
+        source.start(0);
+    } else {
+        source.noteOn(0);
+    }
   }
 };
 
