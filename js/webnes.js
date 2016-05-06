@@ -27,7 +27,6 @@ var WebNES = function(nes) {
     } else {
         source.noteOn(0);
     }
-    nes.stop();
   });
 
   var intervalId = 0;
