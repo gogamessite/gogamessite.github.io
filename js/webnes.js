@@ -66,7 +66,7 @@ WebNES.prototype = {
   },
   writeAudio: function(leftSamples, rightSamples) {
     var source = this.audio.createBufferSource();
-    var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
+    var buffer = this.audio.createBuffer(2, 44100, this.nes.papu.sampleRate);
     buffer.getChannelData(0).set(leftSamples);
     buffer.getChannelData(1).set(rightSamples);
     source.buffer = buffer;
