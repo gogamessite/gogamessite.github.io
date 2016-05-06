@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html manifest="GoGames.appcache">
+    <head>
+        <meta charset="utf-8">
+        <title>Go Games</title>
+        <meta name="description" content="Games for everyone on the Go.">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon-120.png">
+        <link href="images/apple-touch-startup-image-640x1096.png"
+              media="(device-width: 320px) and (device-height: 568px)
+                 and (-webkit-device-pixel-ratio: 2)"
+              rel="apple-touch-startup-image">
+         <link href="images/apple-touch-startup-image-640x920.png"
+              media="(device-width: 320px) and (device-height: 480px)
+                 and (-webkit-device-pixel-ratio: 2)"
+              rel="apple-touch-startup-image">
+        <link href="images/apple-touch-startup-image-320x460.png"
+              media="(device-width: 320px) and (device-height: 480px)
+                 and (-webkit-device-pixel-ratio: 1)"
+              rel="apple-touch-startup-image">
+        <link href="images/apple-touch-startup-image-768x1004.png" 
+              media="(device-width: 768px) 
+                and (orientation: portrait)" 
+              rel="apple-touch-startup-image">
+        <link href="images/apple-touch-startup-image-748x1024.png" 
+              media="(device-width: 768px) 
+                and (orientation: landscape)" 
+              rel="apple-touch-startup-image">
+        <link href="images/apple-touch-startup-image-1536x2008.png" 
+              media="(device-width: 1536px) and (orientation: portrait) 
+                and (-webkit-device-pixel-ratio: 2)"
+              rel="apple-touch-startup-image">
+        <link href="images/apple-touch-startup-image-2048x1496.png" 
+              media="(device-width: 1536px)  and (orientation: landscape) 
+                and (-webkit-device-pixel-ratio: 2)" 
+              rel="apple-touch-startup-image">
+      
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key=""></script>
+        <script src="js/jsnes.min.js"></script>
+        <script src="js/userAgents.js"></script>
+        <script src="js/webnes.js"></script>
+        <div id="desktopLanding">
+          <p>Go Games are only available for <i>mobile</i> devices.
+          <br>
+          Visit http://</p>
+          <img src="images/noDesktop.png" alt="nesWork" id="noDesktop"></img>
+          <br><br>
+          <p style="">Go Games  was built on top of webNES under the <a href="https://github.com/conradev/webn.es/commit/f4f9c31ba38892f04d925947570eb686516d955a">MIT license</a>.</p>
+          <br>
+          <p><a href="https://github.com/conradev/webn.es"><i class="fa fa-github fa-3x"></i></a></p>
+          <br>
+          <p style="color:#505050">webNES is built off of <a href="https://github.com/bfirsh/jsnes">jsNES</a> made by <a href="https://fir.sh">@bfirsh</a></p>
+        </div>
+        <div id="play">
+            <canvas id="screen" width="256" height="240"></canvas>
+            <div id="portrait_controls">
+                <div id="buttons">
+                    <div id="arrow_keys">
+                        <img src="images/up_arrow.png" height=14% width=15% id="portrait_up" oncontextmenu="return false;">
+                        </img>
+                        
+                        <img src="images/right_arrow.png" width=19.5% height=11% id="portrait_right" oncontextmenu="return false;">
+                        </img>
+                        
+                        <img src="images/down_arrow.png" height=14% width=15% id="portrait_down" oncontextmenu="return false;">
+                        </img>
+
+                        <img src="images/left_arrow.png" width=19.5% height=11% id="portrait_left" oncontextmenu="return false;">
+                        </img>
+                    </div>
+
+                    <div id="portrait_settings_keys">
+                        <img id="portrait_select" height=7% width=20% src="images/select_button.png" oncontextmenu="return false;">
+                        </img>
+
+                        <img id="portrait_start" height=7% width=20% src="images/start_button.png" oncontextmenu="return false;">
+                        </img>
+                    </div>
+                    
+                    <div id="portrait_action_keys">
+                        <img id="portrait_B" height=15% width= 20% src="images/b_button.png" oncontextmenu="return false;">
+    
+                        </img>
+
+                        <img id="portrait_A" height=15% width= 20% src="images/a_button.png" oncontextmenu="return false;">
+                        </img>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="home">
+            <div id="header">
+                <!-- <img src="images/logo.png" alt="Go Games"> -->
+                <div id="addROM">
+                    <img src="images/plus.png">
+                </div>
+            </div>
+            <div id="scroll">
+                <ul></ul>
+            </div>
+        </div>
+        
+    </body>
+</html>
