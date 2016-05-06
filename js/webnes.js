@@ -20,7 +20,7 @@ var WebNES = function(nes) {
   var self = this;
   $(document).one('touchend', function() {
     var source = self.audio.createBufferSource();
-    source.buffer = self.audio.createBuffer(2, 1, 44100);
+    source.buffer = self.audio.createBuffer(2, 22050, 44100);
     source.connect(self.audio.destination);
     if (source.start) {
         source.start(0);
@@ -65,10 +65,10 @@ WebNES.prototype = {
     this.canvasContext.putImageData(this.canvasData, 0, 0);
   },
   writeAudio: function(leftSamples, rightSamples) {
+    var source = this.audio.createBufferSource();
     var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
     buffer.getChannelData(0).set(leftSamples);
     buffer.getChannelData(1).set(rightSamples);
-    var source = this.audio.createBufferSource();
     source.buffer = buffer;
     source.connect(this.audio.destination);
     if (source.start) {
