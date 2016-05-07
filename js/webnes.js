@@ -2,6 +2,23 @@ var WebNES = function(nes) {
   this.nes = nes;
   this.audio = null;
   
+          // Unlock audio
+    var self = this;
+    $(document).one('touchend', function() {
+      window.AudioContext = window.AudioContext||window.webkitAudioContext;
+      this.audio = new AudioContext();
+      //this.audio = new webkitAudioContext();
+
+      var source = self.audio.createBufferSource();
+      source.buffer = self.audio.createBuffer(2, 44100, 44100);
+      source.connect(self.audio.destination);
+      if (source.start) {
+          source.start(0);
+      } else {
+          source.noteOn(0);
+      }
+    });
+    
   // Initialize screen context
   this.screen = document.getElementById('screen');
   this.canvasContext = this.screen.getContext('2d');
@@ -65,23 +82,6 @@ WebNES.prototype = {
           source.noteOn(0);
       }
     }
-
-        // Unlock audio
-    var self = this;
-    $(document).one('touchend', function() {
-      window.AudioContext = window.AudioContext||window.webkitAudioContext;
-      this.audio = new AudioContext();
-      //this.audio = new webkitAudioContext();
-
-      var source = self.audio.createBufferSource();
-      source.buffer = self.audio.createBuffer(2, 44100, 44100);
-      source.connect(self.audio.destination);
-      if (source.start) {
-          source.start(0);
-      } else {
-          source.noteOn(0);
-      }
-    });
   }
 };
 
