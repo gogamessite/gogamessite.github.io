@@ -1,9 +1,7 @@
 var WebNES = function(nes) {
   this.nes = nes;
-  window.AudioContext = window.AudioContext||window.webkitAudioContext;
-  this.audio = new AudioContext();
-  //this.audio = new webkitAudioContext();
-
+  this.audio = null;
+  
   // Initialize screen context
   this.screen = document.getElementById('screen');
   this.canvasContext = this.screen.getContext('2d');
@@ -16,18 +14,6 @@ var WebNES = function(nes) {
       this.canvasData.data[i] = 0xFF;
   }
 
-  // Unlock audio
-  var self = this;
-  $(document).one('click', function() {
-    var source = self.audio.createBufferSource();
-    source.buffer = self.audio.createBuffer(2, 44100, 44100);
-    source.connect(self.audio.destination);
-    if (source.start) {
-        source.start(0);
-    } else {
-        source.noteOn(0);
-    }
-  });
 
   var intervalId = 0;
   var startEvent = 'touchstart';
@@ -65,17 +51,37 @@ WebNES.prototype = {
     this.canvasContext.putImageData(this.canvasData, 0, 0);
   },
   writeAudio: function(leftSamples, rightSamples) {
-    var source = this.audio.createBufferSource();
-    var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
-    buffer.getChannelData(0).set(leftSamples);
-    buffer.getChannelData(1).set(rightSamples);
-    source.buffer = buffer;
-    source.connect(this.audio.destination);
-    if (source.start) {
-        source.start(0);
-    } else {
-        source.noteOn(0);
+    if(this.audio != null)
+    {
+      var source = this.audio.createBufferSource();
+      var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
+      buffer.getChannelData(0).set(leftSamples);
+      buffer.getChannelData(1).set(rightSamples);
+      source.buffer = buffer;
+      source.connect(this.audio.destination);
+      if (source.start) {
+          source.start(0);
+      } else {
+          source.noteOn(0);
+      }
     }
+
+        // Unlock audio
+    var self = this;
+    $(document).bind('touchend', function() {
+      window.AudioContext = window.AudioContext||window.webkitAudioContext;
+      this.audio = new AudioContext();
+      //this.audio = new webkitAudioContext();
+
+      var source = self.audio.createBufferSource();
+      source.buffer = self.audio.createBuffer(2, 44100, 44100);
+      source.connect(self.audio.destination);
+      if (source.start) {
+          source.start(0);
+      } else {
+          source.noteOn(0);
+      }
+    });
   }
 };
 
