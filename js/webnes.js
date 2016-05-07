@@ -17,17 +17,17 @@ var WebNES = function(nes) {
   }
 
   // Unlock audio
-  /*var self = this;
-  $(document).bind('touchend', function() {
+  var self = this;
+  $(document).one('click', function() {
     var source = self.audio.createBufferSource();
-    source.buffer = self.audio.createBuffer(1, 44100, 44100);
+    source.buffer = self.audio.createBuffer(2, 44100, 44100);
     source.connect(self.audio.destination);
     if (source.start) {
         source.start(0);
     } else {
         source.noteOn(0);
     }
-  });*/
+  });
 
   var intervalId = 0;
   var startEvent = 'touchstart';
@@ -66,9 +66,9 @@ WebNES.prototype = {
   },
   writeAudio: function(leftSamples, rightSamples) {
     var source = this.audio.createBufferSource();
-    var buffer = this.audio.createBuffer(1, leftSamples.length, this.nes.papu.sampleRate);
+    var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
     buffer.getChannelData(0).set(leftSamples);
-    //buffer.getChannelData(1).set(rightSamples);
+    buffer.getChannelData(1).set(rightSamples);
     source.buffer = buffer;
     source.connect(this.audio.destination);
     if (source.start) {
