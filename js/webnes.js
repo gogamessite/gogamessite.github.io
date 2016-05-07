@@ -80,7 +80,7 @@ WebNES.prototype = {
       var source = this.audio.createBufferSource();
 
       if(this.audiobuffer == null) {
-        this.audiobuffer = this.audio.createBuffer(2, 16384, 44100);
+        this.audiobuffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
       }
 
   /*for (var channel = 0; channel < 2; channel++) {
