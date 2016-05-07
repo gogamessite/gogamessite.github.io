@@ -3,23 +3,6 @@ var WebNES = function(nes) {
   this.audio = null;
   this.unlocked = false;
 
-    // Unlock audio
-    var self = this;
-    $(document).bind('touchend', function() {
-      if(self.audio != null && self.unlocked != true){
-        var source = self.audio.createBufferSource();
-        source.buffer = self.audio.createBuffer(2, 44100, 44100);
-        source.connect(self.audio.destination);
-        if (source.start) {
-            source.start(0);
-        } else {
-            source.noteOn(0);
-        }
-
-        self.unlocked = true;
-      }
-    });
-
   // Initialize screen context
   this.screen = document.getElementById('screen');
   this.canvasContext = this.screen.getContext('2d');
@@ -74,6 +57,24 @@ WebNES.prototype = {
       this.audio = new AudioContext();
       //this.audio = new webkitAudioContext();
     }
+
+    // Unlock audio
+    var self = this;
+    $(document).bind('touchend', function() {
+      if(self.audio != null && self.unlocked != true){
+        var source = self.audio.createBufferSource();
+        source.buffer = self.audio.createBuffer(2, 44100, 44100);
+        source.connect(self.audio.destination);
+        if (source.start) {
+            source.start(0);
+        } else {
+            source.noteOn(0);
+        }
+
+        self.unlocked = true;
+      }
+    });
+
     if(this.audio != null && this.unlocked == true) {
       var source = this.audio.createBufferSource();
       var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
