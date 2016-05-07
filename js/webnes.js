@@ -132,7 +132,7 @@ $(function() {
         var rom = localStorage.getItem(record.storage);
         nes.loadRom(rom);
         nes.loadedId = record.id;
-        nes.setMasterVolume(255);
+        JSNES.PAPU.setMasterVolume(255);
       }
       $(document).bind('touchmove', function(event) {
          event.preventDefault();
