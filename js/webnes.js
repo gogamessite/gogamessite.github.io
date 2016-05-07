@@ -17,7 +17,7 @@ var WebNES = function(nes) {
   }
 
   // Unlock audio
-  var self = this;
+  /*var self = this;
   $(document).bind('touchend', function() {
     var source = self.audio.createBufferSource();
     source.buffer = self.audio.createBuffer(1, 44100, 44100);
@@ -27,7 +27,7 @@ var WebNES = function(nes) {
     } else {
         source.noteOn(0);
     }
-  });
+  });*/
 
   var intervalId = 0;
   var startEvent = 'touchstart';
