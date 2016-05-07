@@ -1,6 +1,7 @@
 var WebNES = function(nes) {
   this.nes = nes;
   this.audio = null;
+  this.audiobuffer = null;
   this.unlocked = false;
 
   // Initialize screen context
@@ -77,10 +78,14 @@ WebNES.prototype = {
 
     if(this.audio != null && this.unlocked == true) {
       var source = this.audio.createBufferSource();
-      var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
-      buffer.getChannelData(0).set(leftSamples);
-      buffer.getChannelData(1).set(rightSamples);
-      source.buffer = buffer;
+
+      if(this.audiobuffer == null) {
+        this.audiobuffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
+      }
+      //var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
+      this.audiobuffer.getChannelData(0).set(leftSamples);
+      this.audiobuffer.getChannelData(1).set(rightSamples);
+      source.buffer = this.audiobuffer;
       source.connect(this.audio.destination);
       if (source.start) {
           source.start(0);
