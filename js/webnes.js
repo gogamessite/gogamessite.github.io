@@ -68,7 +68,7 @@ WebNES.prototype = {
 
         // Unlock audio
     var self = this;
-    $(document).bind('touchend', function() {
+    $(document).one('touchend', function() {
       window.AudioContext = window.AudioContext||window.webkitAudioContext;
       this.audio = new AudioContext();
       //this.audio = new webkitAudioContext();
