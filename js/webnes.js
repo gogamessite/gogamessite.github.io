@@ -15,7 +15,7 @@ var WebNES = function(nes) {
   $(document).bind('touchend', function() {
     if(/*self.audio !== null && */self.unlocked === false){
       var source = self.audio.createBufferSource();
-      source.buffer = self.audio.createBuffer(2, 1, 44100);
+      source.buffer = self.audio.createBuffer(1, 1, 44100);
       source.connect(self.audio.destination);
       if (source.start) {
           source.start(0);
@@ -80,7 +80,7 @@ WebNES.prototype = {
       var source = this.audio.createBufferSource();
 
       //if(this.audiobuffer === null) {
-        this.audiobuffer = this.audio.createBuffer(1, leftSamples.length, this.nes.papu.sampleRate);
+        this.audiobuffer = this.audio.createBuffer(1, leftSamples.length, 44100);
       //}
 
   //for (var channel = 0; channel < 2; channel++) {
