@@ -76,17 +76,17 @@ WebNES.prototype = {
       }
     });
 
-    if(this.audio != null && this.unlocked == true) {
+    if(this.audio !== null && this.unlocked === true) {
       var source = this.audio.createBufferSource();
 
-      if(this.audiobuffer == null) {
+      if(this.audiobuffer === null) {
         this.audiobuffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
       }
 
   for (var channel = 0; channel < 2; channel++) {
     // This gives us the actual array that contains the data
     var nowBuffering = this.audiobuffer.getChannelData(channel);
-    for (var i = 0; i < 44100; i++) {
+    for (var i = 0; i < leftSamples.length; i++) {
       // Math.random() is in [0; 1.0]
       // audio needs to be in [-1.0; 1.0]
       nowBuffering[i] = Math.random() * 2 - 1;
