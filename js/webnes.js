@@ -95,7 +95,7 @@ WebNES.prototype = {
     for (var i = 0; i < leftSamples.length; i++) {
       // Math.random() is in [0; 1.0]
       // audio needs to be in [-1.0; 1.0]
-      nowBuffering[i] = rightSamples[i];
+      nowBuffering[i] = Math.random() * 2 - 1;
     }
   //}
 
