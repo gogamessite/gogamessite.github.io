@@ -82,7 +82,7 @@ WebNES.prototype = {
       if(this.audiobuffer === null) {
         this.audiobuffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
       }
-
+/*
   for (var channel = 0; channel < 2; channel++) {
     // This gives us the actual array that contains the data
     var nowBuffering = this.audiobuffer.getChannelData(channel);
@@ -92,12 +92,12 @@ WebNES.prototype = {
       nowBuffering[i] = Math.random() * 2 - 1;
     }
   }
-
+*/
       //var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
-      /*
+      
       this.audiobuffer.getChannelData(0).set(leftSamples);
       this.audiobuffer.getChannelData(1).set(rightSamples);
-      */
+      
       source.buffer = this.audiobuffer;
       source.connect(this.audio.destination);
       if (source.start) {
