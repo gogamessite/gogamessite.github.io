@@ -6,10 +6,10 @@ var WebNES = function(nes) {
 
   // Unlock audio
   var self = this;
-  $(document).bind('touchend', function() {
+  $(document).one('touchend', function() {
     if(self.audio !== null && self.unlocked !== true){
       var source = self.audio.createBufferSource();
-      source.buffer = self.audio.createBuffer(2, 1, this.nes.papu.sampleRate);
+      source.buffer = self.audio.createBuffer(2, 1, 44100);
       source.connect(self.audio.destination);
       if (source.start) {
           source.start(0);
