@@ -89,7 +89,11 @@ WebNES.prototype = {
     for (var i = 0; i < leftSamples.length; i++) {
       // Math.random() is in [0; 1.0]
       // audio needs to be in [-1.0; 1.0]
-      nowBuffering[i] = (leftSamples[i] / 32768.0) - 1.0;
+      if(leftSamples[i] > 1.0 || leftSamples[i] < -1.0)
+      {
+        this.nes.stop();
+      }
+      nowBuffering[i] = leftSamples[i];// / 32768.0 - 1.0;
     }
     /*nowBuffering = this.audiobuffer.getChannelData(1);
     for (var i = 0; i < leftSamples.length; i++) {
