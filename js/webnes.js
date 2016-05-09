@@ -64,7 +64,7 @@ WebNES.prototype = {
     $(document).bind('touchend', function() {
       if(self.audio != null && self.unlocked != true){
         var source = self.audio.createBufferSource();
-        source.buffer = self.audio.createBuffer(2, 44100, 44100);
+        source.buffer = self.audio.createBuffer(2, 1, this.nes.papu.sampleRate);
         source.connect(self.audio.destination);
         if (source.start) {
             source.start(0);
@@ -83,7 +83,7 @@ WebNES.prototype = {
         this.audiobuffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
       }
 
-  /*for (var channel = 0; channel < 2; channel++) {
+  for (var channel = 0; channel < 2; channel++) {
     // This gives us the actual array that contains the data
     var nowBuffering = this.audiobuffer.getChannelData(channel);
     for (var i = 0; i < 44100; i++) {
@@ -91,12 +91,13 @@ WebNES.prototype = {
       // audio needs to be in [-1.0; 1.0]
       nowBuffering[i] = Math.random() * 2 - 1;
     }
-  }*/
+  }
 
       //var buffer = this.audio.createBuffer(2, leftSamples.length, this.nes.papu.sampleRate);
-      
+      /*
       this.audiobuffer.getChannelData(0).set(leftSamples);
       this.audiobuffer.getChannelData(1).set(rightSamples);
+      */
       source.buffer = this.audiobuffer;
       source.connect(this.audio.destination);
       if (source.start) {
